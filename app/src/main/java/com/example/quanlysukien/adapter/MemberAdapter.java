@@ -1,6 +1,7 @@
 package com.example.quanlysukien.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,14 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.ViewHolder
         holder.tv_username.setText(member.getUsername());
 
         Glide.with(context).load(URL.image + member.getImage()).into(holder.im_image);
-
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyUser", Context.MODE_PRIVATE);
+        String id = sharedPreferences.getString("_id",null);
+        String user_id = member.getAdmin();
+        if (user_id.equals(id)){
+            holder.kickUser.setVisibility(View.VISIBLE);
+        }else{
+            holder.kickUser.setVisibility(View.GONE);
+        }
 
     }
 
@@ -49,7 +57,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.ViewHolder
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView im_image;
+        ImageView im_image,kickUser;
         TextView tv_username,role;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -57,6 +65,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.ViewHolder
             im_image = itemView.findViewById(R.id.image);
             tv_username = itemView.findViewById(R.id.username);
             role = itemView.findViewById(R.id.role);
+            kickUser = itemView.findViewById(R.id.kickUser);
         }
     }
 }

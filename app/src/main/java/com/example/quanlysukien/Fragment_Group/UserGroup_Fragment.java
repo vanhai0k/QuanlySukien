@@ -62,10 +62,12 @@ public class UserGroup_Fragment extends Fragment {
                     JSONArray jsonArray = response.getJSONArray("data");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        UserMember member = new UserMember();
+                        member.setAdmin(jsonObject.getString("admin"));
                         JSONArray jsonArrayNumber = jsonObject.getJSONArray("numbers");
                         for (int j = 0; j < jsonArrayNumber.length(); j++) {
                             JSONObject numberObject = jsonArrayNumber.getJSONObject(j);
-                            UserMember member = new UserMember();
+
                             // Extract data from the nested JSON object
                             JSONObject userIDObject = numberObject.getJSONObject("userID");
 
@@ -73,12 +75,15 @@ public class UserGroup_Fragment extends Fragment {
                             member.setImage(userIDObject.getString("image"));
                             member.setId(userIDObject.getString("_id"));
 
-                            list.add(member);
+//                            list.add(member);
                         }
-                        adapter = new MemberAdapter(getContext(),list);
-                        recyclerviewmember.setAdapter(adapter);
+                        list.add(member);
+//                        adapter = new MemberAdapter(getContext(),list);
+//                        recyclerviewmember.setAdapter(adapter);
 
                     }
+                    adapter = new MemberAdapter(getContext(),list);
+                    recyclerviewmember.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

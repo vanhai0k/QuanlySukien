@@ -41,7 +41,15 @@
                 android:id="@+id/role"
                 android:textSize="16dp"
                 />
-
+            <ImageView
+                android:id="@+id/kickUser"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/xbutton"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:visibility="gone"
+                />
         </LinearLayout>
     </LinearLayout>
 
