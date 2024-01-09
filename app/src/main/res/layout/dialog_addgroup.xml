@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Join Group"
+        android:textColor="@color/colorAccrnt"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="20dp"
+        />
+    <EditText
+        android:id="@+id/ed_status"
+        android:layout_width="300dp"
+        android:padding="5dp"
+        android:layout_height="wrap_content"
+        android:hint="Ly do tham gia group!!!"
+        android:background="@android:color/transparent"
+        android:layout_marginBottom="10dp"
+        />
+
+</LinearLayout>
