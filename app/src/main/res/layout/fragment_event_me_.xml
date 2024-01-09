@@ -11,11 +11,15 @@
         android:orientation="vertical"
         >
         <Spinner
+            android:layout_gravity="right"
+            android:layout_marginRight="8dp"
             android:id="@+id/spinnerTimeRange"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginTop="6dp"
+            android:background="@drawable/border_vien"
+            android:padding="5dp"
             android:layout_marginBottom="5dp"/>
         <!-- TODO: Update blank fragment layout -->
         <androidx.recyclerview.widget.RecyclerView

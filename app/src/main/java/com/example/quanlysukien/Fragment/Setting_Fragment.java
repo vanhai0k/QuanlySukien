@@ -103,7 +103,7 @@ public class Setting_Fragment extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    int participantCount = response.getInt("ongoingEventsCo");
+                    int participantCount = response.getInt("ongoingEventsCount");
                     countPlace.setText(participantCount+"");
                 } catch (JSONException e) {
                     e.printStackTrace();

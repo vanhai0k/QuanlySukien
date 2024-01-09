@@ -104,7 +104,7 @@ public class Event_Fragment extends Fragment {
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     private SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm", Locale.getDefault());
-    String status;
+    String status ="";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -222,13 +222,13 @@ public class Event_Fragment extends Fragment {
         RequestBody requestL = RequestBody.create(MediaType.parse("multipart/form-data"), locations);
         RequestBody requestD = RequestBody.create(MediaType.parse("multipart/form-data"), decsription);
 
-        Date currentDate = new Date();
-        String currentStr = sdf.format(currentDate);
-        if (currentStr.compareTo(sdate) >=0 && currentStr.compareTo(edate) <0){
-             status = "Dang dien ra";
-        }else{
-             status = "Chua dien ra";
-        }
+//        Date currentDate = new Date();
+//        String currentStr = sdf.format(currentDate);
+//        if (currentStr.compareTo(sdate) >=0 && currentStr.compareTo(edate) <0){
+//             status = "Dang dien ra";
+//        }else{
+//             status = "Chua dien ra";
+//        }
         RequestBody requestSD = RequestBody.create(MediaType.parse("multipart/form-data"), sdate);
         RequestBody requestED = RequestBody.create(MediaType.parse("multipart/form-data"), edate);
 

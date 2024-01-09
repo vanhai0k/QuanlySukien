@@ -82,4 +82,8 @@ public interface API {
     @PUT("updatePassword/{id}")
     Call<UserEvent> updatePassword(@Path("id") String id, @Body UserEvent user);
 
+    @PATCH("yeuthich/{id}")
+    Call<EventChennal> yeuthich(@Path("id") String id);
+    @PATCH("cancelyeuthich/{id}")
+    Call<EventChennal> cancelyeuthich(@Path("id") String id);
 }

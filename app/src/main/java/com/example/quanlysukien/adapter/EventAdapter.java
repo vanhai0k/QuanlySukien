@@ -2,6 +2,7 @@ package com.example.quanlysukien.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,15 +12,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.quanlysukien.API.API;
 import com.example.quanlysukien.API.URL;
 import com.example.quanlysukien.QuanLyEvent.Infomation_Event;
 import com.example.quanlysukien.R;
 import com.example.quanlysukien.model.EventChennal;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder>{
     List<EventChennal> list;
@@ -59,6 +66,61 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder>
         String imageUrl = URL.image + event.getImage();
         Glide.with(context).load(imageUrl).into(holder.image);
 
+        Drawable drawableToShow;
+        if (event.getStatus().equals("1")){
+            drawableToShow = ContextCompat.getDrawable(context, R.drawable.heartred);
+        }else{
+            drawableToShow = ContextCompat.getDrawable(context, R.drawable.heartwhite);
+        }
+
+        if (drawableToShow != null) {
+            holder.heart.setImageDrawable(drawableToShow);
+        }
+        String id = event.getId();
+        if (event.getStatus().equals("1")){
+            holder.heart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    API.api.cancelyeuthich(id).enqueue(new Callback<EventChennal>() {
+                        @Override
+                        public void onResponse(Call<EventChennal> call, Response<EventChennal> response) {
+                            if (response.isSuccessful()){
+                                Toast.makeText(context, "Unfavourite", Toast.LENGTH_SHORT).show();
+                                notifyDataSetChanged();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<EventChennal> call, Throwable t) {
+
+                        }
+                    });
+                }
+            });
+
+        }else{
+            holder.heart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    API.api.yeuthich(id).enqueue(new Callback<EventChennal>() {
+                        @Override
+                        public void onResponse(Call<EventChennal> call, Response<EventChennal> response) {
+                            if (response.isSuccessful()){
+                                Toast.makeText(context, "Love", Toast.LENGTH_SHORT).show();
+                                notifyDataSetChanged();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<EventChennal> call, Throwable t) {
+
+                        }
+                    });
+                }
+            });
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +151,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder>
 
     public static class EventHolder extends RecyclerView.ViewHolder {
         TextView eventName,startDate,endDate,startTime,endTime,location;
-        ImageView image;
+        ImageView image,heart;
         public EventHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -100,6 +162,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventHolder>
             endTime = itemView.findViewById(R.id.endTime);
             image = itemView.findViewById(R.id.image);
             location = itemView.findViewById(R.id.location);
+            heart = itemView.findViewById(R.id.heart);
         }
     }
 }
